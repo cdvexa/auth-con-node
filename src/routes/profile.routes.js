@@ -3,7 +3,7 @@ import { getProfile, createProfile } from '../controllers/profile.controller.js'
 
 const profileRoutes = Router();
 
-profileRoutes.get('/', getProfile)
-profileRoutes.post('/create', createProfile);
+profileRoutes.get('/:id', getProfile)
+profileRoutes.post('/', createProfile);
 
 export default profileRoutes;

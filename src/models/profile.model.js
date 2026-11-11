@@ -32,7 +32,7 @@ export default Profile.init({
 User.hasOne(Profile);
 Profile.belongsTo(User);
 
-Profile.sync({ alter: true })
+//Profile.sync({ alter: true })
 
 
 

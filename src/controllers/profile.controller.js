@@ -7,21 +7,33 @@ export const getProfile = (async (req = request, res = response) => {
         const id = req.params.id;
         const profile = await Profile.findByPk(id);
         if (!profile) {
-            res.status(404).json({ message: "Perfil no encontrado" })
+            return res.status(404).json({ message: "Perfil no encontrado" })
         }
-        res.status(200).json(profile)
+        return res.status(200).json(profile)
 
     } catch (error) {
-        res.status(500).json({ message: "Error al obtener perfil", error: error.message })
+        return res.status(500).json({ message: "Error al obtener perfil", error: error.message })
     }
 })
 
 export const createProfile = (async (req = request, res = response) => {
     try {
-        const profile = await Profile.create(req.body.id = randomUUID(), ...req.body)
-        res.status(201).json({ message: "Perfil creado", profile })
+
+        const { name, lastName, phone, whatsapp, UserId } = req.body
+
+        const newProfile = {
+            id: randomUUID(),
+            name,
+            lastName,
+            phone,
+            whatsapp,
+            UserId
+        }
+
+        const profile = await Profile.create(newProfile)
+        return res.status(201).json({ message: "Perfil creado", profile })
 
     } catch (error) {
-        res.status(500).json({ message: "Error al crear perfil", error: error.message })
+        return res.status(500).json({ message: "Error al crear perfil", error: error.message })
     }
 })
